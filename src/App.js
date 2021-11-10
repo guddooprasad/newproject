@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import HomeScreen from './screen/HomeScreen'
 import './App.css';
 
