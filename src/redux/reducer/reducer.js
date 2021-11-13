@@ -1,12 +1,16 @@
+import  {ADD_CITY, PROPERTIES_LIST} from '../actions/actionTypes';
 
-const  ADD_CITY = "ADD_CITY"
+const initialstate = {
+    cityList: [],
+    propertiesList: {}
+}
 
-export const cityReducer = (state = [],action) =>{
+export const Reducer = (state = initialstate,action) =>{
     switch(action.type){
-        case ADD_CITY : 
-           return [
-                   action.payload.data
-           ]
+        case ADD_CITY :
+           return {...state, cityList:action.payload.data }
+        case PROPERTIES_LIST :
+           return {...state, propertiesList:action.payload.data }
         default : 
            return state
     }

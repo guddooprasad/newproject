@@ -1,4 +1,4 @@
 import {combineReducers} from 'redux';
-import {cityReducer} from '../reducer/reducer'
+import {Reducer} from '../reducer/reducer'
 
-export default combineReducers({cityReducer});
+export default combineReducers({Reducer});

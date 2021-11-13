@@ -40,7 +40,7 @@ const InputBar = (props) =>{
             style={inputStyle}
           >
           </input>
-          {
+          { props.showList &&
             <ul style={{WebkitOverflowScrolling : 'touch',borderWidth : '2px',borderRadius : '8px',bordercolor :'red'}}>
               {
                 props.cityList.map((item)=>{
