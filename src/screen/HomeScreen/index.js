@@ -28,7 +28,7 @@ const HomeScreen = () => {
 
 
   const onInput = async (value) => {
-    if (value.toString().length == 0) {
+    if (value.toString().length === 0) {
       setFilterCity([])
       return
     }
