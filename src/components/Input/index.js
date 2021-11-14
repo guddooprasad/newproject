@@ -1,8 +1,10 @@
-import React from 'react'
+import React ,{useState,useRef}from 'react'
+
 
 const inputStyle = {
   marginTop : '200px',
-  width : '40%',
+  width : '50%',
+  marginLeft : '0px',
   height : '50px',
   fontSize : '20px',
   paddingLeft : '8px',
@@ -19,36 +21,44 @@ const searchItemStyle = {
 }
 
 
+
 const InputBar = (props) =>{
 
-  const cityName = ['abc','def','ghi']
+  const [showList,setShowList] = useState(true)
+  const [value,setValue] = useState('')
+  const inputRef = useRef(null)
 
     const onInput = (event) =>{
       props.onInput(event.target.value)
+      setShowList(true)
     }
 
-    const onItemClicked = (item)=>{
-
+    const onItemSelected = (item) =>{
+      props.onItemSelected(item)
+      inputRef.current.value = (item)
+      setShowList(false)
     }
-
 
     return(
         <>
-          <input 
+        <div style={{width : 'auto',height : 'auto'}}>
+        <input 
+            ref= {inputRef}
             className = "input" 
             onChange = {onInput} 
             style={inputStyle}
-          >
-          </input>
-          { props.showList &&
-            <ul style={{WebkitOverflowScrolling : 'touch',borderWidth : '2px',borderRadius : '8px',bordercolor :'red'}}>
-              {
-                props.cityList.map((item)=>{
-                  return <p key={item} style={searchItemStyle} onClick = {()=>{console.log(item, "is clicked")}}>{item}</p>
-                })
-              }
-            </ul>
-          }
+            />
+            {
+                <ul style={{WebkitOverflowScrolling : 'touch',borderWidth : '2px',borderRadius : '8px',bordercolor :'red'}}>
+                  {
+                    showList && props.filterCity.map((item)=>{
+                      return <p key={item} style={searchItemStyle} onClick = {()=>{onItemSelected(item)}}>{item}</p>
+                    })
+                  }
+                </ul>
+            }
+        </div>
+         
         </>
     )
 }
