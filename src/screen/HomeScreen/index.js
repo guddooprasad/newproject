@@ -39,6 +39,8 @@ const HomeScreen = () => {
     })
     setFilterCity(filteredList)
     setSelectedCity(null)
+    dispatch(addPropertiesList({ properties: null, cityName: null}))
+
   }
 
   const onSearchClick = async () => {
