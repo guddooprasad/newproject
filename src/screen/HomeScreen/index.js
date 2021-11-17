@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Input from '../../components/Input'
-import { addCity, addPropertiesList } from '../../redux/actions/action'
+import { addCity, addPropertiesList, addFacsetData } from '../../redux/actions/action'
 import CityDetails from '../CiityDetails'
+import Filters from '../Filters'
 
 const BASE_URL = 'http://99acres.com/api-aggregator/static-attributes?includedFields='
 
@@ -15,7 +16,8 @@ const HomeScreen = () => {
   const [selectedCity,setSelectedCity] = useState('')
 
   useEffect(() => {
-    fetchCity()
+    fetchCity();
+    fetchFacsetData()
   }, []);
 
 
@@ -25,7 +27,12 @@ const HomeScreen = () => {
     const list = citiesList.cities.map((cityItem) => cityItem.label);
     dispatch(addCity(list))
   }
-
+  
+  const fetchFacsetData = async () => {
+      const CITY_API_URL = `https://www.99acres.com/api-aggregator/discovery/srp/search?&platform=DESKTOP&SRP&page_size=15&page=1&city=71&seoUrlType=DEFAULT`;
+      const cityData = await (await fetch(CITY_API_URL)).json();
+      dispatch(addFacsetData({ furnish: cityData.facets.FURNISH, propertyType: cityData.facets.PROPERTY_TYPE, bedroomNum: cityData.facets.BEDROOM_NUM  }))
+  }
 
   const onInput = async (value) => {
     if (value.toString().length === 0) {
@@ -51,7 +58,7 @@ const HomeScreen = () => {
         const key = cityKeyResponse[0].city[0];
         const CITY_API_URL = `https://www.99acres.com/api-aggregator/discovery/srp/search?&platform=DESKTOP&SRP&page_size=15&page=1&city=${key}&seoUrlType=DEFAULT`;
         const cityData = await (await fetch(CITY_API_URL)).json();
-        dispatch(addPropertiesList({ properties: cityData.properties, cityName: cityData.citySeoString }))
+        dispatch(addPropertiesList({ properties: cityData.properties, cityName: cityData.citySeoString  }))
       }
   }
 
@@ -60,10 +67,10 @@ const HomeScreen = () => {
   }
 
   return (
-    <div style ={{height : '100%',width :'100%'}}>
+    <div style ={{height : '100%',width :'100%', paddingLeft: '50px'}}>
 
-    <div style={{width : '20%',height : '100%',backgroundColor :'red',float : 'left'}}>
-      
+    <div style={{width : '20%',height : '100%',float : 'left', marginTop: '200px'}}>
+      <Filters/>
     </div>
 
       <span style={{width : '80%',height : '100%',float : 'right'}}>

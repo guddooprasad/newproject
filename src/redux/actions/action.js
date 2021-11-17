@@ -1,4 +1,4 @@
-import  {ADD_CITY, PROPERTIES_LIST} from './actionTypes';
+import  {ADD_CITY, PROPERTIES_LIST, FACSET_INFO} from './actionTypes';
 
 export const addCity = (data) =>{
     return {
@@ -10,6 +10,13 @@ export const addCity = (data) =>{
 export const addPropertiesList = (data) =>{
     return {
         type : PROPERTIES_LIST,
+        payload : {data}
+    }
+}
+
+export const addFacsetData = (data) => {
+    return {
+        type : FACSET_INFO,
         payload : {data}
     }
 }
