@@ -1,8 +1,6 @@
 import React from 'react';
 
 const PropertyData = ({ data }) => {
-	//console.log('image', data.PROPERTY_IMAGES[0])
-	console.log(data.PROPERTY_IMAGES);
 	return (
 		<div style={{width:'40%',border: '1px solid black',margin : 'auto',borderRadius : '8px',paddingTop : '20px',marginBottom : '20px'} }>
 			<h3 style={{fontFamily : 'monospace'}}>{data.PROP_HEADING}</h3>

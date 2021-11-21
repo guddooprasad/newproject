@@ -73,7 +73,7 @@ const HomeScreen = () => {
       <Filters/>
     </div>
 
-      <span style={{width : '80%',height : '100%',float : 'right'}}>
+      <span style={{width : '60%',height : '100%',float : 'right'}}>
         <Input
           onInput={onInput}
           cityList={filterCity}

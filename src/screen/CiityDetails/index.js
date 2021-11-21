@@ -5,12 +5,17 @@ import PropertyData from './PropertyData';
 
 const CityDetails = () => {
     const propertiesData = useSelector(state => state.Reducer.propertiesList);
+    const [filteredPropertyData, setFilteredPropertyData] = useState([]);
+
+    // Filter Logic
 
     if(!propertiesData.properties) return null;
 
+    const data = filteredPropertyData.length === 0 ? propertiesData : filteredPropertyData;
+
     return (
         <>
-        {propertiesData.properties.map(data => <PropertyData data={data}/>)}
+        {data.properties.map(data => <PropertyData data={data}/>)}
         </>
     )
 }

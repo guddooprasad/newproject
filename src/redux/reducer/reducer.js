@@ -1,9 +1,10 @@
-import  {ADD_CITY, PROPERTIES_LIST, FACSET_INFO} from '../actions/actionTypes';
+import  {ADD_CITY, PROPERTIES_LIST, FACSET_INFO, FILTER_DATA} from '../actions/actionTypes';
 
 const initialstate = {
     cityList: [],
     propertiesList: {},
-    facsetInfo: {}
+    facsetInfo: {},
+    filterData: {}
 }
 
 export const Reducer = (state = initialstate,action) =>{
@@ -14,7 +15,12 @@ export const Reducer = (state = initialstate,action) =>{
            return {...state, propertiesList:action.payload.data }
         case FACSET_INFO :
             return {...state, facsetInfo:action.payload.data }
+        case FILTER_DATA:
+            {
+                const { key, value} = action.payload.data;
+                return {...state, filterData: {...state.filterData, [key]: value}}
+            } 
         default : 
            return state
     }
-} 
+}  
